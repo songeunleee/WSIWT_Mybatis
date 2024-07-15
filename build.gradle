@@ -1,0 +1,77 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.7.14'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '11'
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'javax.xml.bind:jaxb-api:2.3.1'
+
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    implementation group: 'com.google.guava', name: 'guava', version: '31.1-jre'
+
+    implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    runtimeOnly 'mysql:mysql-connector-java:8.0.33'
+
+    implementation group: 'org.springframework.security', name: 'spring-security-oauth2-client', version: '5.6.1'
+
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+task('release') {
+    /* ./gradlew build를 먼저 실행하라는 뜻이다. */
+    dependsOn("build")
+
+    doLast {
+        def stdout = new ByteArrayOutputStream()
+        /* exec - 커맨드 라인 프로세서; 파워셸/터미널에서 실행하는 것과 같다. */
+        exec {
+            /* $eb setenv SPRING_PROFILES_ACTIVE=prod */
+            commandLine 'eb', 'setenv', 'SPRING_PROFILES_ACTIVE=prod'
+            standardOutput = stdout
+        }
+        /* 결과 로깅을 위한 작업 */
+        println "eb setenv SPRING_PROFILES_ACTIVE=prod :\n$stdout";
+        exec {
+            /* $eb deploy */
+            commandLine 'eb', 'deploy'
+            standardOutput = stdout
+        }
+        println "eb deploy :\n$stdout";
+        println "Release succeeded."
+    }
+}
