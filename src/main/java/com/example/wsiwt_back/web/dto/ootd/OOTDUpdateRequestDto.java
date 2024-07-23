@@ -8,11 +8,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 public class OOTDUpdateRequestDto {
+
     private String url;
-    private String content;
+    private String contents;
 
     @Builder
-    public OOTDUpdateRequestDto(String content){
-        this.content = content;
+    public OOTDUpdateRequestDto(String url, String contents){
+        this.url = url;
+        this.contents = contents;
     }
 }

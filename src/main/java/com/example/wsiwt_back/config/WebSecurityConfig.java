@@ -56,7 +56,7 @@ public class WebSecurityConfig {
 
                  .authorizeHttpRequests(authorize -> authorize
 
-                         .antMatchers("/","/css/**","/images/**","/js/**","/profile","/auth/**","/ootds","/oauth2/**","/h2-console/**",
+                         .antMatchers("/","/css/**","/images/**","/js/**","/profile","/auth/**","/ootds/**","/oauth2/**","/h2-console/**",
                                  "/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**","/v3/**","/open-api/**").permitAll()
 
                          .anyRequest().authenticated())

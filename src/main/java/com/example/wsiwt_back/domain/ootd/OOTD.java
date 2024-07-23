@@ -8,6 +8,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,40 +21,32 @@ import java.util.List;
 
 public class OOTD  {
 
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-    //@Column
-    private String url;
 
-    //@Column(nullable = false)
-    public String content;
+    public String url;
 
-    //@JsonIgnore
-    //@ManyToOne( fetch = FetchType.LAZY)
-    //@JoinColumn(name = "user_id")
-    private UserEntity user;
+    public String contents;
 
-    //@BatchSize(size = 100)
-    //@JsonIgnore
-    //@OneToMany(mappedBy = "ootd",fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private List<Comment> comments = new ArrayList<>();
+    public Long userId;
+
+    public LocalDateTime createdAt;
+
+    public LocalDateTime updatedAt;
 
 
 
     @Builder
-    public OOTD(Long id, String content, String author, String url, UserEntity user,List<Comment> comments){
+    public OOTD(Long id, String contents, String author, String url, Long userId){
         this.id = id;
-        this.content = content;
+        this.contents = contents;
         this.url = url;
-        this.user = user;
-        this.comments = comments;
+        this.userId = userId;
 
     }
 
     public void update(String content, String url){
-        this.content = content;
+        this.contents = content;
         this.url = url;
     }
 }

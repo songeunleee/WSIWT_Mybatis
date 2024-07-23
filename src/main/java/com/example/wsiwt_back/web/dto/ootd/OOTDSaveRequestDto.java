@@ -13,13 +13,13 @@ import java.util.List;
 
 public class OOTDSaveRequestDto {
 
-    private String content;
+    private String contents;
 
     private String url;
 
     @Builder
-    public OOTDSaveRequestDto(String content, String author,String url){
-        this.content = content;
+    public OOTDSaveRequestDto(String contents, String author,String url){
+        this.contents = contents;
 
      //   this.image = image;
         this.url = url;
@@ -27,6 +27,6 @@ public class OOTDSaveRequestDto {
     }
 
     public OOTD toEntity(){
-        return OOTD.builder().content(content).url(url).build();
+        return OOTD.builder().contents(contents).url(url).build();
     }
 }

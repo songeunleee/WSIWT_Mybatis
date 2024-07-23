@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.wsiwt_back.domain.ootd.OOTDRepository">
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO OOTD (contents, url, userId, createdAt, updatedAt)
+        VALUES (#{contents}, #{url}, #{userId}, now(), now())
+    </insert>
+
+    <select id="findAll" resultType="com.example.wsiwt_back.domain.ootd.OOTD">
+        SELECT * FROM ootd
+        ORDER BY createdAt DESC
+        LIMIT 5 OFFSET #{offset}
+    </select>
+
+    <select id="count" resultType="int">
+        SELECT count(*) FROM ootd
+    </select>
+
+    <select id="findById" resultType="com.example.wsiwt_back.domain.ootd.OOTD">
+        SELECT * FROM ootd
+        WHERE id = #{id}
+    </select>
+
+    <update id="updateById" parameterType="com.example.wsiwt_back.web.dto.ootd.OOTDUpdateRequestDto">
+        UPDATE ootd
+        SET contents = #{requestDto.contents}, url = #{requestDto.url}, updatedAt = now()
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM ootd WHERE id = #{id}
+    </delete>
+
+
+
+</mapper>
