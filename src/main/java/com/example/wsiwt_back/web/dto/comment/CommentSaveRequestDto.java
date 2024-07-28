@@ -10,19 +10,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CommentSaveRequestDto {
 
-    private String content;
+    private String contents;
     private String author;
 
 
     @Builder
-    public CommentSaveRequestDto(String content, String author,String ootdId){
-        this.content = content;
+    public CommentSaveRequestDto(String contents, String author,String ootdId){
+        this.contents = contents;
         this.author = author;
 
 
     }
 
     public Comment toEntity(){
-        return Comment.builder().content(content).author(author).build();
+        return Comment.builder().contents(contents).author(author).build();
     }
 }

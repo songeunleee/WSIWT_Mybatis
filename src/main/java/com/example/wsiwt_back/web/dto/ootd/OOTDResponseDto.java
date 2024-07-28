@@ -33,7 +33,7 @@ public class OOTDResponseDto {
 
 
 
-    public OOTDResponseDto(OOTD ootd, UserEntity user){
+    public OOTDResponseDto(OOTD ootd, UserEntity user, List<CommentResponseDto> comments){
         this.id = ootd.getId();
         this.contents = ootd.getContents();
         this.author = new AuthorDto(user);
@@ -41,9 +41,24 @@ public class OOTDResponseDto {
         this.createdAt = ootd.getCreatedAt();
         this.updatedAt = ootd.getUpdatedAt();
         //  this.commentPage = new PageResponeDto(page);
-      //  this.comments = ootd.getComments().stream().filter(item->item.getDepth() == 0L).map(CommentResponseDto::new)
-            //    .collect(Collectors.toList());
+        this.comments = comments;
+//ootd.getComments().stream().filter(item->item.getDepth() == 0L).map(CommentResponseDto::new)
+//                .collect(Collectors.toList());
 
+
+    }
+
+    public OOTDResponseDto(OOTDResponseDto ootd, List<CommentResponseDto> comments){
+        this.id = ootd.getId();
+        this.contents = ootd.getContents();
+        this.author = ootd.getAuthor();
+        this.imgUrl = ootd.getImgUrl();
+        this.createdAt = ootd.getCreatedAt();
+        this.updatedAt = ootd.getUpdatedAt();
+        //  this.commentPage = new PageResponeDto(page);
+        this.comments = comments;
+//ootd.getComments().stream().filter(item->item.getDepth() == 0L).map(CommentResponseDto::new)
+//                .collect(Collectors.toList());
 
 
     }

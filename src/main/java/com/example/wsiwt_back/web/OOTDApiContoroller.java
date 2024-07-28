@@ -39,10 +39,10 @@ public class OOTDApiContoroller {
     }
 
     @GetMapping("/ootds/{page}")
-    public ResponseEntity<Page<OOTD>> findAllOOTDs(@PathVariable int page){
+    public ResponseEntity<Page<OOTDResponseDto>> findAllOOTDs(@PathVariable int page){
 
         System.out.println(page);
-        Page<OOTD> ootds = ootdService.findAll(page);
+        Page<OOTDResponseDto> ootds = ootdService.findAll(page);
         System.out.println(ootds.toString());
       //  List<OOTDResponseDto> responseDto = ootds.stream().map(item -> new OOTDResponseDto(item,userService.findById(item.getUserId().toString()))).collect(Collectors.toList());
 

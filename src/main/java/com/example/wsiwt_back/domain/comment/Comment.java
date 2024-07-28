@@ -9,7 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 
-
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,54 +18,38 @@ import java.util.List;
 
 
 
-public class Comment  extends BaseTimeEntity {
-
-  //  @Id
-  //  @GeneratedValue(generator = "system-uuid")
-  //  @GenericGenerator(name = "system-uuid",strategy = "uuid")
-    private String id;
+public class Comment {
 
 
-   // @ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "ootd_id")
-    //@JsonIgnore
-    public OOTD ootd;
+    private Long id;
 
-    //@Column(nullable = false)
+    public Long ootdId;
 
-    public String content;
+    public String contents;
 
-    //@ManyToOne(fetch = FetchType.LAZY)
-   // @JoinColumn(name = "user_id")
-    //@JsonIgnore
-    private UserEntity user;
+    private Long userId;
 
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "parent_id")
-    private Comment parent;
+    private Long parentId;
 
     private Long depth;
 
-    //@OneToMany(mappedBy = "parent", fetch = FetchType.LAZY,
-      //      cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
-    //@JsonIgnore
-    private List<Comment> child = new ArrayList<>();
+    public LocalDateTime createdAt;
+
+    public LocalDateTime updatedAt;
+
+    private List<Comment> child;
+
 
 
     @Builder
-    public Comment(String id,  String content, String author, UserEntity user, OOTD ootd, Comment parent, Long depth,List<Comment> child){
+    public Comment(Long id,  String contents, String author, Long userId, Long ootdId, Long parentId, Long depth){
         this.id = id;
-        this.content = content;
-        this.user = user;
-        this.ootd = ootd;
-        this.parent = parent;
+        this.contents = contents;
+        this.userId = userId;
+        this.ootdId = ootdId;
+        this.parentId = parentId;
         this.depth = depth;
-        this.child = child;
     }
 
-    public void update(String content){
-        this.content = content;
-
-    }
 
 }
